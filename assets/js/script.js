@@ -1,13 +1,11 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
+
 $(function () {
-  var currentDate = dayjs().hour();
-  $("currentDay").text(currentDate);
+  var currentDate = dayjs().format('HH:mm');
+  $("#currentDay").text(currentDate);
 
   var currentHour = dayjs().hour();
 
-  $(".time-block").each(function() {
+  $(".time-block").each(function () {
     var hour = parseInt($(this).attr("id").split("-")[1]);
 
 
@@ -25,16 +23,16 @@ $(function () {
     }
   });
 
-  $(".saveBtn").on("click", function(event) {
+  $(".saveBtn").on("click", function (event) {
     event.preventDefault();
     var hour = parseInt($(this).closest(".time-block").attr("id").split("-")[1]);
     var eventText = $(this).closest(".time-block").find(".description").val();
     localStorage.setItem("event-" + hour, eventText);
   })
-  });
+});
 
-  
-  
+
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
